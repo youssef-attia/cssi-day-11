@@ -13,13 +13,16 @@ window.onload = () => {
     createNoteButton.addEventListener("click",() => {
         const noteTitle = document.querySelector("#noteTitle");
         const noteText = document.querySelector("#noteText");
+        const noteLabels = document.querySelector("#labels");
 
         firebase.database().ref(`/users/${googleUser.uid}`).push({
             title:noteTitle.value,
-            text:noteText.value
+            text:noteText.value,
+            labels:noteLabels.value.split(" "),
         }).then(()=>{
             noteTitle.value='';
             noteText.value='';
+            noteLabels.value='';
         }).catch(error=>console.log(error))
     })
 }
